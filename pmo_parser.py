@@ -42,7 +42,7 @@ while True:
                                           "ip": host["ip"],
                                           "username": host["user"],
                                           "password": host["pass"]})
-                output = ssh_c.send_config_set(ssh_comnds.join(" dbM"), delay_factor=.5, exit_config_mode=False)
+                output = ssh_c.send_config_set(ssh_comnds, delay_factor=.5, exit_config_mode=False)
                 promt = ssh_c.find_prompt()
                 infolist = output.replace("--", ""). \
                     replace("-\n", ""). \
@@ -70,17 +70,13 @@ while True:
                     ))
                 non_Rep = vbt.pop(0)
                 for name, val in non_Rep:
-                    #print('%s = %s' % (name.prettyPrint(), val.prettyPrint()))
                     row.append((name.prettyPrint(), val.prettyPrint()))
                 for r in vbt:
                     r = r[nR:]
                     for name, val in r:
-                        #print('%s = %s' % (name.prettyPrint(), val.prettyPrint()))
                         row.append((name.prettyPrint(), val.prettyPrint()))
                 print("\n".join(row))
                 infolist = row
-                #print("snmp")
-                #pass
             else:
                 raise Exception("unexpected host type")
 #
